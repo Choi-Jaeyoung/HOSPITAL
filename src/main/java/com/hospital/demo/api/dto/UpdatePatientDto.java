@@ -6,15 +6,15 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-public class CreatePatientDto {
+public class UpdatePatientDto {
 
     //=== Bodys ======================================================
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class CreatePatientBody {
+    public static class UpdatePatientBody {
     
-        private Long hospitalId;
+        private Long patientId;
         private String patientName;
         private String patientGender;
         private String patientBirth;
@@ -22,11 +22,12 @@ public class CreatePatientDto {
     
     }
 
+    
     //=== Responses ======================================================
     @Getter
     @AllArgsConstructor
     @Builder
-    public static class CreatePatientResponse {
+    public static class UpdatePatientResponse {
     
         private String resultMessage;
     

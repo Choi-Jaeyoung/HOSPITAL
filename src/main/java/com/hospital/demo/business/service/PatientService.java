@@ -63,4 +63,44 @@ public class PatientService {
     }
 
 
+    /**
+     * 환자 수정
+     * @param patientId
+     * @param patientName
+     * @param patientGender
+     * @param patientBirth
+     * @param patientPhone
+     */
+    @Transactional
+    public void updatePatient(
+        Long patientId
+        ,   String patientName
+        ,   String patientGender
+        ,   String patientBirth
+        ,   String patientPhone
+    ) {
+
+        // 환자정보 조회
+        PatientEntity findPatient = patientRepository.findById(patientId).orElse(null);
+
+        if( findPatient != null ) {
+            
+            if ( patientName != null ) {
+                findPatient.setPatientName(patientName);
+            }
+            if ( patientGender != null ) {
+                findPatient.setPatientGender(patientGender);
+            }
+            if ( patientBirth != null ) {
+                findPatient.setPatientBirth(patientBirth);
+            }
+            if ( patientPhone != null ) {
+                findPatient.setPatientPhone(patientPhone);
+            }
+
+        }
+
+    }
+
+
 }
