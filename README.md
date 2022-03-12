@@ -57,7 +57,7 @@ VALUES
 
 | 기능명 | 환자 생성 |
 | :---: | --- |
-| 요청  (예시) | POST    http://localhost:8080/patient
+| 요청<(예시) | POST    http://localhost:8080/patient
 -H        accept: application/json
 -d         {
                 "hospitalId" : 2
