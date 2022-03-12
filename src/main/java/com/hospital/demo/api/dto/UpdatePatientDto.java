@@ -14,7 +14,6 @@ public class UpdatePatientDto {
     @NoArgsConstructor
     public static class UpdatePatientBody {
     
-        private Long patientId;
         private String patientName;
         private String patientGender;
         private String patientBirth;

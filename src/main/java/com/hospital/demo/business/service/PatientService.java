@@ -6,6 +6,7 @@ import com.hospital.demo.data.entity.HospitalEntity;
 import com.hospital.demo.data.entity.PatientEntity;
 import com.hospital.demo.data.repository.HospitalRepository;
 import com.hospital.demo.data.repository.PatientRepository;
+import com.hospital.demo.data.repository.VisitRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class PatientService {
     private PatientRepository patientRepository;
     @Autowired
     private HospitalRepository hospitalRepository;
+    @Autowired
+    private VisitRepository visitRepository;
 
 
     /**
@@ -98,6 +101,25 @@ public class PatientService {
                 findPatient.setPatientPhone(patientPhone);
             }
 
+        }
+
+    }
+
+
+    /**
+     * 환자삭제
+     * @param patientId
+     */
+    @Transactional
+    public void deletePatient(
+        Long patientId
+    ) {
+
+        // 환자 검색
+        PatientEntity findPatient = patientRepository.findById(patientId).orElse(null);
+
+        if ( findPatient != null ) {
+            patientRepository.delete(findPatient);
         }
 
     }
