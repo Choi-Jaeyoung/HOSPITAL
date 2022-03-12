@@ -1,10 +1,14 @@
 package com.hospital.demo.api.controller;
 
+import java.util.List;
+
 import com.hospital.demo.api.dto.CreatePatientDto.CreatePatientBody;
 import com.hospital.demo.api.dto.CreatePatientDto.CreatePatientResponse;
 import com.hospital.demo.api.dto.DeletePatientDto.DeletePatientResponse;
 import com.hospital.demo.api.dto.GetPatientDto;
 import com.hospital.demo.api.dto.GetPatientDto.GetPatientResponse;
+import com.hospital.demo.api.dto.GetPatientsDto;
+import com.hospital.demo.api.dto.GetPatientsDto.GetPatientsResponse;
 import com.hospital.demo.api.dto.UpdatePatientDto.UpdatePatientBody;
 import com.hospital.demo.api.dto.UpdatePatientDto.UpdatePatientResponse;
 import com.hospital.demo.business.service.PatientService;
@@ -121,5 +125,25 @@ public class PatientController {
         return getPatientResponse;
     
     }
+
+    
+    @GetMapping("/patients")
+    public GetPatientsResponse getPatients(
+        
+    ) {
+
+        GetPatientsResponse getPatientsResponse = null;
+
+        // 환자 정보 조회
+        List<GetPatientsDto.Patient> patients = patientService.getPatients();
+
+        getPatientsResponse = GetPatientsResponse.builder()
+            .patients(patients)
+            .build();
+
+        return getPatientsResponse;
+    
+    }
+
 
 }

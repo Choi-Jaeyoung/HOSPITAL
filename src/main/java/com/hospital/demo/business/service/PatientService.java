@@ -1,11 +1,13 @@
 package com.hospital.demo.business.service;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.hospital.demo.api.dto.GetPatientDto;
+import com.hospital.demo.api.dto.GetPatientsDto;
 import com.hospital.demo.data.entity.CodeEntity;
 import com.hospital.demo.data.entity.HospitalEntity;
 import com.hospital.demo.data.entity.PatientEntity;
@@ -185,6 +187,47 @@ public class PatientService {
         }
 
         return patient;
+
+    }
+
+
+    /**
+     * 환자 목록조회
+     * @return
+     */
+    public List<GetPatientsDto.Patient> getPatients(
+
+    ) {
+
+        List<GetPatientsDto.Patient> patients = new ArrayList<>();
+
+        List<PatientEntity> findPatients = patientRepository.findAll();
+
+        findPatients.stream().forEach(findPatient -> {
+
+            VisitEntity findVisit = visitRepository.findTopByPatientPatientId(findPatient.getPatientId()).orElse(null);
+
+            patients.add(
+                GetPatientsDto.Patient.builder()
+                    .patientId(findPatient.getPatientId())
+                    .patientName(findPatient.getPatientName())
+                    .patientRegistrationNumber(findPatient.getPatientRegistrationNumber())
+                    .patientGender(
+                        codeRepository.findById(findPatient.getPatientGender()).orElse(new CodeEntity()).getCodeName()
+                    )
+                    .patientBirth(findPatient.getPatientBirth())
+                    .patientPhone(findPatient.getPatientPhone())
+                    .lastVisitDate(
+                        findVisit != null
+                        ?   findVisit.getVisitDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        :   ""
+                    )
+                    .build()
+            );
+            
+        });
+
+        return patients;
 
     }
 
