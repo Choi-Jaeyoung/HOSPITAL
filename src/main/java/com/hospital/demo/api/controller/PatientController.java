@@ -3,12 +3,15 @@ package com.hospital.demo.api.controller;
 import com.hospital.demo.api.dto.CreatePatientDto.CreatePatientBody;
 import com.hospital.demo.api.dto.CreatePatientDto.CreatePatientResponse;
 import com.hospital.demo.api.dto.DeletePatientDto.DeletePatientResponse;
+import com.hospital.demo.api.dto.GetPatientDto;
+import com.hospital.demo.api.dto.GetPatientDto.GetPatientResponse;
 import com.hospital.demo.api.dto.UpdatePatientDto.UpdatePatientBody;
 import com.hospital.demo.api.dto.UpdatePatientDto.UpdatePatientResponse;
 import com.hospital.demo.business.service.PatientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -64,7 +67,7 @@ public class PatientController {
 
         UpdatePatientResponse updatePatientResponse = null;
 
-        // 환자 정보 생성
+        // 환자 정보 수정
         patientService.updatePatient(patientId, patientName, patientGender, patientBirth, patientPhone);
 
         updatePatientResponse = UpdatePatientResponse.builder()
@@ -86,7 +89,7 @@ public class PatientController {
 
         DeletePatientResponse deletePatientResponse = null;
 
-        // 환자 정보 생성
+        // 환자 정보 삭제
         patientService.deletePatient(patientId);
 
         deletePatientResponse = DeletePatientResponse.builder()
@@ -94,6 +97,28 @@ public class PatientController {
             .build();
 
         return deletePatientResponse;
+    
+    }
+
+
+    
+    
+    @GetMapping("/patient/{patientId}")
+    public GetPatientResponse getPatient(
+        @PathVariable("patientId")
+        Long patientId
+    ) {
+
+        GetPatientResponse getPatientResponse = null;
+
+        // 환자 정보 조회
+        GetPatientDto.Patient patient = patientService.getPatient(patientId);
+
+        getPatientResponse = GetPatientResponse.builder()
+            .patient(patient)
+            .build();
+
+        return getPatientResponse;
     
     }
 
