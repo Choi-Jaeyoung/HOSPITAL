@@ -55,10 +55,10 @@ VALUES
 
 ## ⚒️인터페이스 정의
 
-| 기능명 | 환자 생성 |
-| :---: | --- |
-| 요청</br>(예시) | POST    http://localhost:8080/patient</br>-H        accept: application/json</br>-d         {</br>                "hospitalId" : 2</br>               ,"patientName" : "아무개"</br>               ,"patientGender" : "M"</br>               ,"patientBirth" : "19921106"</br>               ,"patientPhone" : "01051031594”</br>             } |
-| 응답</br>(예시) | {</br>    “resultMessage” : “등록 성공!”</br>} |
+| 기능명 | 환자 생성 
+| :---: | --- 
+| 요청</br>(예시) | POST    http://localhost:8080/patient</br>-H        accept: application/json</br>-d         {</br>                "hospitalId" : 2</br>               ,"patientName" : "아무개"</br>               ,"patientGender" : "M"</br>               ,"patientBirth" : "19921106"</br>               ,"patientPhone" : "01051031594”</br>             } 
+| 응답</br>(예시) | {</br>    “resultMessage” : “등록 성공!”</br>} 
 
 | 기능명 | 환자 수정 |
 | --- | --- |
