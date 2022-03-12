@@ -18,7 +18,7 @@ querydsl
 
 - **ERD**
     
-    ![erd.png](%E1%84%92%E1%85%AA%E1%86%AB%E1%84%8C%E1%85%A1%20%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%20a37fe/erd.png)
+    ![erd.png](https://user-images.githubusercontent.com/75962573/158026081-0e699228-31b4-4358-8fe3-1d0e8204d2e0.png)
     
 
 ```jsx
