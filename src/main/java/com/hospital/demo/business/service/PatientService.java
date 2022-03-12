@@ -8,12 +8,14 @@ import java.util.stream.Collectors;
 
 import com.hospital.demo.api.dto.GetPatientDto;
 import com.hospital.demo.api.dto.GetPatientsDto;
+import com.hospital.demo.code.SearchType;
 import com.hospital.demo.data.entity.CodeEntity;
 import com.hospital.demo.data.entity.HospitalEntity;
 import com.hospital.demo.data.entity.PatientEntity;
 import com.hospital.demo.data.entity.VisitEntity;
 import com.hospital.demo.data.repository.CodeRepository;
 import com.hospital.demo.data.repository.HospitalRepository;
+import com.hospital.demo.data.repository.PatientQueryRepository;
 import com.hospital.demo.data.repository.PatientRepository;
 import com.hospital.demo.data.repository.VisitRepository;
 
@@ -32,6 +34,8 @@ public class PatientService {
     private VisitRepository visitRepository;
     @Autowired
     private CodeRepository codeRepository;
+    @Autowired
+    private PatientQueryRepository patientQueryRepository;
 
 
     /**
@@ -196,12 +200,15 @@ public class PatientService {
      * @return
      */
     public List<GetPatientsDto.Patient> getPatients(
-
+        SearchType searchType
+        ,   String keyword
+        ,   Long pageSize
+        ,   Long pageNo
     ) {
 
         List<GetPatientsDto.Patient> patients = new ArrayList<>();
 
-        List<PatientEntity> findPatients = patientRepository.findAll();
+        List<PatientEntity> findPatients = patientQueryRepository.searchPatient(searchType, keyword, pageSize, pageNo);
 
         findPatients.stream().forEach(findPatient -> {
 

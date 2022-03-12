@@ -12,6 +12,7 @@ import com.hospital.demo.api.dto.GetPatientsDto.GetPatientsResponse;
 import com.hospital.demo.api.dto.UpdatePatientDto.UpdatePatientBody;
 import com.hospital.demo.api.dto.UpdatePatientDto.UpdatePatientResponse;
 import com.hospital.demo.business.service.PatientService;
+import com.hospital.demo.code.SearchType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -129,13 +131,23 @@ public class PatientController {
     
     @GetMapping("/patients")
     public GetPatientsResponse getPatients(
-        
+        @RequestParam("searchType")
+        SearchType searchType
+        ,
+        @RequestParam(value = "keyword", defaultValue = "")
+        String keyword
+        ,
+        @RequestParam(value = "pageSize", defaultValue = "10")
+        Long pageSize
+        ,
+        @RequestParam(value = "pageNo", defaultValue = "1")
+        Long pageNo
     ) {
 
         GetPatientsResponse getPatientsResponse = null;
 
         // 환자 정보 조회
-        List<GetPatientsDto.Patient> patients = patientService.getPatients();
+        List<GetPatientsDto.Patient> patients = patientService.getPatients(searchType, keyword, pageSize, pageNo);
 
         getPatientsResponse = GetPatientsResponse.builder()
             .patients(patients)
